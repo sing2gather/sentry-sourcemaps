@@ -46,24 +46,24 @@ if (!checkRequiredFiles([paths.appHtml, paths.appIndexJs])) {
 
 // Tools like Cloud9 rely on this.
 const DEFAULT_PORT = parseInt(process.env.PORT, 10) || 3000;
-const HOST = process.env.HOST || '0.0.0.0';
+const HOST = 'localhost' || '0.0.0.0';
 
-if (process.env.HOST) {
-  console.log(
-    chalk.cyan(
-      `Attempting to bind to HOST environment variable: ${chalk.yellow(
-        chalk.bold(process.env.HOST)
-      )}`
-    )
-  );
-  console.log(
-    `If this was unintentional, check that you haven't mistakenly set it in your shell.`
-  );
-  console.log(
-    `Learn more here: ${chalk.yellow('https://cra.link/advanced-config')}`
-  );
-  console.log();
-}
+// if (process.env.HOST) {
+//   console.log(
+//     chalk.cyan(
+//       `Attempting to bind to HOST environment variable: ${chalk.yellow(
+//         chalk.bold(process.env.HOST)
+//       )}`
+//     )
+//   );
+//   console.log(
+//     `If this was unintentional, check that you haven't mistakenly set it in your shell.`
+//   );
+//   console.log(
+//     `Learn more here: ${chalk.yellow('https://cra.link/advanced-config')}`
+//   );
+//   console.log();
+// }
 
 // We require that you explicitly set browsers and do not fall back to
 // browserslist defaults.

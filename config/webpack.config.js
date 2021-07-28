@@ -26,6 +26,7 @@ const ModuleNotFoundPlugin = require('react-dev-utils/ModuleNotFoundPlugin');
 const ForkTsCheckerWebpackPlugin = require('react-dev-utils/ForkTsCheckerWebpackPlugin');
 const typescriptFormatter = require('react-dev-utils/typescriptFormatter');
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
+const SentryWebpackPlugin = require('@sentry/webpack-plugin');
 
 const postcssNormalize = require('postcss-normalize');
 
@@ -163,9 +164,7 @@ module.exports = function (webpackEnv) {
     // Stop compilation early in production
     bail: isEnvProduction,
     devtool: isEnvProduction
-      ? shouldUseSourceMap
-        ? 'source-map'
-        : false
+      ? 'source-map'
       : isEnvDevelopment && 'cheap-module-source-map',
     // These are the "entry points" to our application.
     // This means they will be the "root" imports that are included in JS bundle.
@@ -736,6 +735,15 @@ module.exports = function (webpackEnv) {
               }),
             },
           },
+        }),
+      isEnvProduction && 
+        new SentryWebpackPlugin({
+          authToken:
+            'da2e43f5601b42de9b1879a1f1fc28de55cbbe203a06480fa25f3122024e2609',
+          org: 'partoo_test_front',
+          project: 'front',
+          include: '.',
+          ignore: ['node_modules', 'config'],
         }),
     ].filter(Boolean),
     // Some libraries import Node modules but don't use them in the browser.
