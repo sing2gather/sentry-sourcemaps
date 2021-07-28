@@ -742,7 +742,7 @@ module.exports = function (webpackEnv) {
             'da2e43f5601b42de9b1879a1f1fc28de55cbbe203a06480fa25f3122024e2609',
           org: 'partoo_test_front',
           project: 'front',
-          include: '.',
+          include: ['build', 'src'],
           ignore: ['node_modules', 'config'],
         }),
     ].filter(Boolean),
