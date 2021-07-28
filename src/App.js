@@ -12,6 +12,7 @@ function App() {
         <img src={logo} className="App-logo" alt="logo" />
         <button type="button" onClick={() => throwError('Une erreur est survenue !')}>Throw an Error</button>
         <button type="button" onClick={() => throwError('Une autre erreur est survenue !')}>Throw an other Error</button>
+        <button type="button" onClick={() => throwError('Une autre autre erreur est survenue !')}>Throw an other other Error</button>
       </header>
     </div>
   );
