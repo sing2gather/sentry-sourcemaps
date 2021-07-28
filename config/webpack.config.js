@@ -27,6 +27,7 @@ const ForkTsCheckerWebpackPlugin = require('react-dev-utils/ForkTsCheckerWebpack
 const typescriptFormatter = require('react-dev-utils/typescriptFormatter');
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 const SentryWebpackPlugin = require('@sentry/webpack-plugin');
+const RemovePlugin = require('remove-files-webpack-plugin');
 
 const postcssNormalize = require('postcss-normalize');
 
@@ -164,8 +165,7 @@ module.exports = function (webpackEnv) {
     // Stop compilation early in production
     bail: isEnvProduction,
     devtool: isEnvProduction
-      // ? 'source-map'
-      ? false
+      ? 'source-map'
       : isEnvDevelopment && 'cheap-module-source-map',
     // These are the "entry points" to our application.
     // This means they will be the "root" imports that are included in JS bundle.
@@ -745,6 +745,17 @@ module.exports = function (webpackEnv) {
           project: 'front',
           include: ['build'],
           ignore: ['node_modules', 'config'],
+        }),
+      isEnvProduction && 
+        new RemovePlugin({
+          after: {
+            test: [
+              {
+                folder: './build/static/js',
+                method: (absPath) => new RegExp(/(.*)\.js.map/).test(absPath),
+              }
+            ]
+          }
         }),
     ].filter(Boolean),
     // Some libraries import Node modules but don't use them in the browser.
